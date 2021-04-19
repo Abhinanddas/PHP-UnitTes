@@ -2,16 +2,20 @@
 
 class SampleClass{
 
-    public function getNumber(){
-        return 10;
+    public function getNumber($a, $b){
+        return $a+$b;
     }
 
-    public function getString(){
-        return "Poda";
+    public function getString($a,$b){
+        return $a.$b;
     }
 
-    public function getBoolean(){
-        return true;
+    public function getBoolean($a,$b){
+        $sum =$a+$b;
+        if($sum > 0){
+            return true;
+        }
+        return false;
     }
 }
 ?>

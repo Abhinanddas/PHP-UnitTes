@@ -14,23 +14,51 @@ class SampleTest extends TestCase{
     protected function tearDown(): void{ 
         $this->sampleObject =null;
     }
-
-    public function testGetBoolean(){
-        $booleanVal = $this->sampleObject->getBoolean();
-        $this->assertTrue($booleanVal !== false);
+    
+        public function addDataProviderForBoolean(){
+            return array(
+                array(1,2,true),
+                array(19,1,true),
+                array(-20,3,false)
+            );
+        }
+    
+        public function addDataProviderForNumber(){
+            return array(
+                array(1,2,3),
+                array(10,20,30),
+                array(1,-2,-1),
+            );
+        }
+        public function addDataProviderForString(){
+            return array(
+                array("a","b","ab"),
+                array("b","a","ba"),
+                array("aa","b","aab"),
+            );
+        }
+    /**
+     * @dataProvider addDataProviderForBoolean
+     */
+    public function testGetBoolean($a,$b,$expected){
+        $booleanVal = $this->sampleObject->getBoolean($a,$b);
+        $this->assertTrue($booleanVal == $expected);
     }
 
-    public function testGetNumber(){
-        $numberVal = $this->sampleObject->getNumber();
-        $this->assertEquals($numberVal,10);
+    /**
+     * @dataProvider addDataProviderForNumber
+     */
+    public function testGetNumber($a,$b,$expected){
+        $numberVal = $this->sampleObject->getNumber($a,$b);
+        $this->assertEquals($numberVal,$expected);
     }
 
-    public function testGetSting(){
+    /**
+     * @dataProvider addDataProviderForString
+     */
+    public function testGetSting($a,$b,$expected){
 
-        $stringVal = $this->sampleObject->getString();
-        $this->assertEquals($stringVal,"Poda");
+        $stringVal = $this->sampleObject->getString($a,$b);
+        $this->assertEquals($stringVal,$expected);
     }
 }
-
-?>
-
